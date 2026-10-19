@@ -1,6 +1,6 @@
 import random
 import copy
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # type: ignore -- matplotlib is installed and works, but mypy doesn't know that
 
 offspring = []
 
