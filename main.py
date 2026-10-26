@@ -1,19 +1,36 @@
 import random
 import copy
+import statistics
 import matplotlib.pyplot as plt # type: ignore -- matplotlib is installed and works, but mypy doesn't know that
 
 import math
+
+"""
+main.py
+This script implements a genetic algorithm to optimize a function using a population of individuals
+"""
 
 offspring = []
 
 N = 20
 P = 50
-MUTRATE = 1 / N
+MUTRATE = 0.1
 GENERATIONS = 500
 
 MIN = -5.12
 MAX = 5.12
-MUTSTEP = 0.05
+MUTSTEP = 0.1
+
+""" 
+### TEST MINIMUM AND MAXIMUM OF POPULATION SWEEP
+
+    MUTSTEP / MUTRATE       Low (0.025)     Medium (0.05)       High (0.1)
+    LOW (0.025)             70.17           63.55               66.50
+    MED (0.05)              70.25           62.13               59.82
+    HIGH (0.1)              60.94           57.36               56.55 -- WINNER --
+
+###
+"""
 
 def maxGenes(x):
     N = len(x)
@@ -113,16 +130,18 @@ for generation in range(GENERATIONS):
     # Update population for the next generation
     population = copy.deepcopy(offspring)
 
-    print(f"Generation {generation + 1}: Average Fitness = {average_fitness[-1]}, Best Fitness = {best_fitness[-1]}")
+    # print(f"Generation {generation + 1}: Average Fitness = {average_fitness[-1]}, Best Fitness = {best_fitness[-1]}")
 
+runMean = (f'{statistics.mean(best_fitness):.2f}')
 
-# Plot the fitness results
-plt.plot(average_fitness, label="Average fitness")
-plt.plot(best_fitness, label="Best fitness")
+if __name__ == "__main__":
+    # Plot the fitness results
+    plt.plot(average_fitness, label="Average fitness")
+    plt.plot(best_fitness, label="Best fitness")
 
-plt.xlabel("Generation")
-plt.ylabel("Fitness")
-plt.title("Fitness over Generations")
-plt.legend()
-plt.grid(True)
-plt.show()
+    plt.xlabel("Generation")
+    plt.ylabel("Fitness")
+    plt.title("Fitness over Generations")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
