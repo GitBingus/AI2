@@ -21,7 +21,7 @@ Y = np.array([
 ])
 
 input_nodes = X.shape[1] # 4 features
-hidden_nodes = 6
+hidden_nodes = 4
 hidden_nodes2 = 3
 output_nodes = 1
 
